@@ -10,16 +10,15 @@ var outer = function(){
 //Invoke outer saving the return value into another variable called 'inner'.
 
   //Code Here
+var inner = outer();
 
 //Once you do that, invoke inner.
 
   //Code Here
-
+inner();
 
 
 //Next problem
-
-
 
 var callFriend = function(){
   var friend = 'Jake';
@@ -33,18 +32,23 @@ var callFriend = function(){
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
   //Code Here
-
+var calling = callFriend();
+calling('435-215-9248');
 
 
 //Next Problem
 
-
-
-/*
-  Write a function called makeCounter that makes the following code work properly.
-*/
+/* Write a function called makeCounter that makes the following code work properly. */
 
   //Code Here
+var makeCounter = function() {
+  var num = 0;
+  return function() {
+    num +=1;
+    return num;
+  };
+};
+
   var count = makeCounter();
   count() // 1
   count() // 2
@@ -52,18 +56,25 @@ var callFriend = function(){
   count() // 4
 
 
-
 //Next Problem
 
+/*  Write a function that accepts another function as it's first argument and returns a new function (which invokes the original function that was passed in) that can only ever be executed once.  Once completed, add a second argument that allows the function to be invoked N number of times.  After the function has been called N number of times, console.log('STAHHP');  */
 
+var outerFn = function(n, fn) {
+  return function() {
+    if(n > 0) {
+      n--;
+      return fn();
+    }
+    else {
+      console.log('STAHHP');
+    }
+  };
+};
 
-/*
-  Write a function that accepts another function as it's first argument and returns a new function
-  (which invokes the original function that was passed in) that can only ever be executed once.
-  Once completed, add a second arguments that allows the function to be invoked N number of times.
-  After the function has been called N number of times, console.log('STAHHP');
-*/
+var add = function() {
+  return 1 + 1;
+};
 
-
-
-
+var run = outerFn(3, add);
+run();
